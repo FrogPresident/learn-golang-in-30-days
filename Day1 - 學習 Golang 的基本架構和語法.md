@@ -124,7 +124,7 @@ import (
 )
 
 func main() {
-	// set n is a radon number ,range(1~100)
+	// set n is a radom number ,range(1~100)
 	n := rand.Intn(100) + 1
 	if n%2 == 1 {
 		fmt.Printf("%d is odd", n)
