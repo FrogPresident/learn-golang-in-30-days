@@ -52,46 +52,5 @@ close(ch)
 ```
 
 
-### go function
-通常會以`go function`的方式來實現多個 goroutine 例子為以下：
-```go!
-func worker(done chan bool) {
-    fmt.Print("Working...")
-    time.Sleep(time.Second)
-    fmt.Println("done")
-
-    // 發送一個值來通知工作已完成
-    done <- true
-}
-
-func main() {
-    done := make(chan bool)
-    go worker(done)
-
-    // 等待工作完成的通知
-    <-done
-}
-```
-#### 1.創建 Channel：
-```go!
-done := make(chan bool)
-```
-這行代碼創建了一個布林型的channel。
-
-#### 2.啟動 worker Goroutine：
-```go!
-go worker(done)
-```
-這行代碼在新的 goroutine 中執行 worker 函數，並將 done channel 傳給它。worker 函數將進行一些工作，然後向 done channel 發送一個信號（true），表示工作已完成。
-
-
-#### 3.接收完成信號：
-
-```go!
-<-done
-```
-在 main 函數中，這行代碼從 done channel 接收值。這個操作會阻塞 main goroutine，直到有值可被接收。當 worker goroutine 發送了 true 之後，main goroutine 從 done 接收這個值並繼續執行。接收操作本身不會將值指派給任何變量，因為這裡只關心信號的到來，而不在乎具體的值，當然你也可以把他輸出出來結果會是`true`。
-
-## 回家作業：
-這次就不出回家作業了，這個部分分成兩個part，下一個篇章會講解為什麼用 channel 比較好，我感覺我這部分也沒有到很熟，我會在問人來補齊這方面相關的知識點。
+這次就不出回家作業了，這個部分分成兩個part，我感覺我這部分也沒有到很熟，我會在問人來補齊這方面相關的知識點。
 
